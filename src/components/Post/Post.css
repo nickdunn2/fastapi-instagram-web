@@ -3,7 +3,6 @@
   max-width: 500px;
   margin: 20px;
   margin-bottom: 45px;
-  padding: 20px;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid lightgray;
@@ -15,4 +14,15 @@
   object-fit: contain;
   border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  border-radius: 10px 10px 0 0;
+}
+
+.post-caption {
+  font-weight: normal;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+}
+
+.post-comments {
+  padding: 20px;
 }
