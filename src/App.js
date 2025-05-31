@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-
-const API_URL = 'http://localhost:8000'
+import Post from './components/Post/Post'
+import { API_URL } from './constants'
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -22,7 +22,11 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Hello World</h1>
+      <div className="posts">
+        {posts.map(post => (
+          <Post key={post.id} post={post} />
+        ))}
+      </div>
     </div>
   )
 }
