@@ -1,6 +1,7 @@
 import './Post.css'
 import { useState, useEffect } from 'react'
 import { API_URL } from '../../constants'
+import { Avatar, Button } from '@mui/material'
 
 const Post = ({ post }) => {
   const [imageUrl, setImageUrl] = useState('')
@@ -20,6 +21,13 @@ const Post = ({ post }) => {
 
   return (
     <div className="post">
+      <div className="post-header">
+        <Avatar src="" alt={post.user.username} />
+        <div className="post-header-info">
+          <h3>{post.user.username}</h3>
+          <Button variant="contained" color="error">Delete</Button>
+        </div>
+      </div>
       <img className="post-image" src={imageUrl} alt={post.title} />
       <p className="post-caption">{post.caption}</p>
       <div className="post-comments">
