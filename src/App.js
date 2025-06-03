@@ -16,7 +16,16 @@ function App() {
         }
         throw response
       })
-      .then(data => setPosts(data))
+      .then(data => {
+        const sorted = data.sort((a, b) => {
+          // sort by timestamp in descending order
+          const aTimestamp = new Date(a.timestamp).getTime()
+          const bTimestamp = new Date(b.timestamp).getTime()
+          return bTimestamp - aTimestamp
+        })
+        return sorted
+      })
+      .then(setPosts)
       .catch(error => console.error('Error fetching posts:', error))
   }, [])
 
