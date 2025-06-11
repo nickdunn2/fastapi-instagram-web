@@ -6,6 +6,35 @@
   background-color: #fafafa;
 }
 
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+  object-fit: contain;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.app-header-image {
+  object-fit: contain;
+  width: 200px;
+}
+
+.app-header-auth {
+  display: flex;
+  gap: 10px;
+}
+
+.app-signin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .posts {
   display: flex;
   flex-direction: column;
