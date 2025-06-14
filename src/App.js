@@ -40,7 +40,6 @@ function App() {
     fetch(`${API_URL}/posts/`)
       .then(response => {
         const json = response.json()
-        console.log(json)
         if (response.ok) {
           return json
         }
