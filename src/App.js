@@ -20,10 +20,14 @@ const modalStyle = {
 
 function App() {
   const [posts, setPosts] = useState([])
-  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [openSignIn, setOpenSignIn] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
+
+  const [authToken, setAuthToken] = useState(null)
+  const [authTokenType, setAuthTokenType] = useState(null)
+  const [username, setUsername] = useState('')
+  const [userId, setUserId] = useState('')
 
   useEffect(() => {
     fetch(`${API_URL}/posts/`)
@@ -50,8 +54,34 @@ function App() {
 
   const handleSignIn = (event) => {
     event.preventDefault()
-    // TODO
-    console.log('Signing in with username:', username, 'and password:', password)
+
+    const formData = new FormData()
+    formData.append('username', username)
+    formData.append('password', password)
+
+    const requestOptions = {
+      method: 'POST',
+      body: formData,
+    }
+
+    fetch(`${API_URL}/login`, requestOptions)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw response
+      })
+      .then(data => {
+        setAuthToken(data.access_token)
+        setAuthTokenType(data.token_type)
+        setUserId(data.user_id)
+        setUsername(data.username)
+      })
+      .catch(error => {
+        console.error('Login failed:', error)
+      })
+
+    setOpenSignIn(false)
   }
 
   return (
