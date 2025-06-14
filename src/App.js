@@ -60,6 +60,34 @@ function App() {
 
   const handleSignUp = (event) => {
     event.preventDefault()
+
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        username,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    fetch(`${API_URL}/users/`, requestOptions)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw response
+      })
+      .then(() => {
+        handleSignIn(event)
+      })
+      .catch(error => {
+        console.error('Signup failed:', error)
+      })
+
+    setOpenSignUp(false)
   }
 
   const handleSignIn = (event) => {
