@@ -84,6 +84,13 @@ function App() {
     setOpenSignIn(false)
   }
 
+  const handleSignOut = () => {
+    setAuthToken(null)
+    setAuthTokenType(null)
+    setUserId('')
+    setUsername('')
+  }
+
   return (
     <div className="app">
       <Modal
@@ -122,22 +129,32 @@ function App() {
       </Modal>
       <div className="app-header">
         <img className="app-header-image" src={INSTAGRAM_LOGO_URL} alt="Instagram" />
-        <div className="app-header-auth">
-          <Button 
-            variant="contained"
-            color="primary"
-            onClick={() => setOpenSignIn(true)}
-          >
-            Log In
-          </Button>
-          <Button 
-            variant="contained"
-            color="primary"
-            onClick={() => setOpenSignUp(true)}
-          >
-            Sign Up
-          </Button>
-        </div>
+        
+        {authToken ? (
+            <div className="app-header-auth">
+              <Button variant="contained" color="primary" onClick={handleSignOut}>
+                Log Out
+              </Button>
+            </div>
+          ) : (
+            <div className="app-header-auth">
+              <Button 
+                variant="contained"
+                color="primary"
+                onClick={() => setOpenSignIn(true)}
+              >
+                Log In
+              </Button>
+              <Button 
+                variant="contained"
+                color="primary"
+                onClick={() => setOpenSignUp(true)}
+              >
+                Sign Up
+              </Button>
+            </div>
+          )
+        }
       </div>
       <div className="posts">
         {posts.map(post => (
