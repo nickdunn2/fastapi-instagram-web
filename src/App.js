@@ -23,7 +23,7 @@ function App() {
   const [password, setPassword] = useState('')
   const [openSignIn, setOpenSignIn] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
-
+  const [email, setEmail] = useState('')
   const [authToken, setAuthToken] = useState(() => localStorage.getItem('authToken'))
   const [authTokenType, setAuthTokenType] = useState(() => localStorage.getItem('authTokenType'))
   const [username, setUsername] = useState(() => localStorage.getItem('username') ?? '')
@@ -57,6 +57,10 @@ function App() {
       .then(setPosts)
       .catch(error => console.error('Error fetching posts:', error))
   }, [])
+
+  const handleSignUp = (event) => {
+    event.preventDefault()
+  }
 
   const handleSignIn = (event) => {
     event.preventDefault()
@@ -129,6 +133,48 @@ function App() {
               onClick={handleSignIn}
             >
               Log In
+            </Button>
+          </form>
+        </Box>
+      </Modal>
+
+      <Modal
+        open={openSignUp}
+        onClose={() => setOpenSignUp(false)}
+      >
+        <Box sx={modalStyle}>
+          <form className="app-signin">
+            <center>
+              <img className="app-header-image" src={INSTAGRAM_LOGO_URL} alt="Instagram" />
+            </center>
+            <Input 
+              placeholder="Email"
+              type="email"
+              required
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <Input 
+              placeholder="Username"
+              type="text"
+              required
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+            />
+            <Input 
+              placeholder="Password"
+              type="password"
+              required
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <Button 
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={handleSignUp}
+            >
+              Sign Up
             </Button>
           </form>
         </Box>
