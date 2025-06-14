@@ -24,10 +24,17 @@ function App() {
   const [openSignIn, setOpenSignIn] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
 
-  const [authToken, setAuthToken] = useState(null)
-  const [authTokenType, setAuthTokenType] = useState(null)
-  const [username, setUsername] = useState('')
-  const [userId, setUserId] = useState('')
+  const [authToken, setAuthToken] = useState(() => window.localStorage.getItem('authToken'))
+  const [authTokenType, setAuthTokenType] = useState(() => window.localStorage.getItem('authTokenType'))
+  const [username, setUsername] = useState(() => window.localStorage.getItem('username') || '')
+  const [userId, setUserId] = useState(() => window.localStorage.getItem('userId') || '')
+
+  useEffect(() => {
+    authToken ? window.localStorage.setItem('authToken', authToken) : window.localStorage.removeItem('authToken')
+    authTokenType ? window.localStorage.setItem('authTokenType', authTokenType) : window.localStorage.removeItem('authTokenType')
+    userId ? window.localStorage.setItem('userId', userId) : window.localStorage.removeItem('userId')
+    username ? window.localStorage.setItem('username', username) : window.localStorage.removeItem('username')
+  }, [authToken, authTokenType, userId, username])
 
   useEffect(() => {
     fetch(`${API_URL}/posts/`)
