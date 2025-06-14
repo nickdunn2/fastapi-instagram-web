@@ -24,16 +24,16 @@ function App() {
   const [openSignIn, setOpenSignIn] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
 
-  const [authToken, setAuthToken] = useState(() => window.localStorage.getItem('authToken'))
-  const [authTokenType, setAuthTokenType] = useState(() => window.localStorage.getItem('authTokenType'))
-  const [username, setUsername] = useState(() => window.localStorage.getItem('username') || '')
-  const [userId, setUserId] = useState(() => window.localStorage.getItem('userId') || '')
+  const [authToken, setAuthToken] = useState(() => localStorage.getItem('authToken'))
+  const [authTokenType, setAuthTokenType] = useState(() => localStorage.getItem('authTokenType'))
+  const [username, setUsername] = useState(() => localStorage.getItem('username') ?? '')
+  const [userId, setUserId] = useState(() => localStorage.getItem('userId') ?? '')
 
   useEffect(() => {
-    authToken ? window.localStorage.setItem('authToken', authToken) : window.localStorage.removeItem('authToken')
-    authTokenType ? window.localStorage.setItem('authTokenType', authTokenType) : window.localStorage.removeItem('authTokenType')
-    userId ? window.localStorage.setItem('userId', userId) : window.localStorage.removeItem('userId')
-    username ? window.localStorage.setItem('username', username) : window.localStorage.removeItem('username')
+    authToken ? localStorage.setItem('authToken', authToken) : localStorage.removeItem('authToken')
+    authTokenType ? localStorage.setItem('authTokenType', authTokenType) : localStorage.removeItem('authTokenType')
+    userId ? localStorage.setItem('userId', userId) : localStorage.removeItem('userId')
+    username ? localStorage.setItem('username', username) : localStorage.removeItem('username')
   }, [authToken, authTokenType, userId, username])
 
   useEffect(() => {
