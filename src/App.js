@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Post from './components/Post/Post'
 import { API_URL } from './constants'
 import { Button, Modal, Box, Input } from '@mui/material'
+import ImageUpload from './components/ImageUpload/ImageUpload'
 
 const INSTAGRAM_LOGO_URL = 'https://www.montclairbikebus.org/assets/images-www/new-instagram-text-logo.png'
 
@@ -241,6 +242,16 @@ function App() {
           <Post key={post.id} post={post} />
         ))}
       </div>
+
+      {authToken && (
+        <ImageUpload
+          authToken={authToken}
+          authTokenType={authTokenType}
+          userId={userId}
+          username={username}
+        />
+      )}
+      {/* TODO: What to show if logged out? */}
     </div>
   )
 }
