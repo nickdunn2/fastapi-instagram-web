@@ -6,6 +6,7 @@ import { Avatar, Button } from '@mui/material'
 const Post = ({ post, authToken, authTokenType }) => {
   const [imageUrl, setImageUrl] = useState('')
   const [comments, setComments] = useState([])
+  const [newComment, setNewComment] = useState('')
 
   useEffect(() => {
     if (post.image_url_type === 'absolute') {
@@ -41,6 +42,12 @@ const Post = ({ post, authToken, authTokenType }) => {
       })
   }
 
+  const postNewComment = (event) => {
+    event.preventDefault()
+
+    console.log(newComment)
+  }
+
   return (
     <div className="post">
       <div className="post-header">
@@ -67,6 +74,28 @@ const Post = ({ post, authToken, authTokenType }) => {
           </div>
         ))}
       </div>
+
+      {authToken && (
+        <form className="post-comment-form">
+          <input
+            type="text"
+            className="post-comment-input"
+            placeholder="Add a comment"
+            value={newComment}
+            onChange={e => setNewComment(e.target.value)}
+          />
+          <Button 
+            type="submit"
+            className="post-comment-button"
+            variant="contained"
+            color="primary"
+            disabled={!newComment.trim()}
+            onClick={postNewComment}
+          >
+            Post
+          </Button>
+        </form>
+      )}
     </div>
   )
 }
